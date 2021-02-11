@@ -16,9 +16,11 @@ ones.
 Requirements:
 There needs to be a "praw.ini" file in the main directory with your Reddit API credentials. It looks something like this:
 
+```
 [bot1] <br>
-client_id=YOUR_CLIENT_ID <br>
-client_secret=YOUR_SECRET_KEY <br>
-user_agent="Some unique user agent" <br>
+client_id=YOUR_CLIENT_ID 
+client_secret=YOUR_SECRET_KEY 
+user_agent="Some unique user agent" 
+```
 
 More info here: https://praw.readthedocs.io/en/latest/getting_started/quick_start.html 
