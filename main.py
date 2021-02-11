@@ -78,7 +78,7 @@ def get_all_listed_stocks():
     return ticker_list
 
 
-def get_subreddit_ticker_timeseries(sub, stockList, verbose=False):
+def get_subreddit_ticker_timeseries(sub, stockList, verbose=False, reddit_timeframe="all"):
     """Get a list of tuples of each time a ticker is mentioned in a given subreddit
 
     Parameters
@@ -103,7 +103,7 @@ def get_subreddit_ticker_timeseries(sub, stockList, verbose=False):
     blacklist = ["A", "I", "DD", "WSB", "YOLO", "RH", "EV", "PE", "ETH", "BTC", "E"]
     tickerSeries = []
 
-    for submission in reddit.subreddit(sub).top("week"):
+    for submission in reddit.subreddit(sub).top(reddit_timeframe):
         submission.comments.replace_more(limit=0)
         if verbose: print(submission.title)
         for comment in submission.comments.list():
@@ -114,7 +114,7 @@ def get_subreddit_ticker_timeseries(sub, stockList, verbose=False):
     return tickerSeries
 
 
-def scrape_stock_subreddits(subs=["wallstreetbets", "stocks", "investing", "smallstreetbets"], verbose=False):
+def scrape_stock_subreddits(subs=["wallstreetbets", "stocks", "investing", "smallstreetbets"], verbose=False, reddit_timeframe="all"):
     """Scrape a list of subreddits for all stock tickers mentioned.
 
     Parameters
@@ -134,7 +134,7 @@ def scrape_stock_subreddits(subs=["wallstreetbets", "stocks", "investing", "smal
     tickerSeries = {}
     for sub in subs:
         if verbose: print(f"Scraping subreddit: {sub}...")
-        subTickers = get_subreddit_ticker_timeseries(sub, listedStocks, verbose=verbose)
+        subTickers = get_subreddit_ticker_timeseries(sub, listedStocks, verbose=verbose, reddit_timeframe=reddit_timeframe)
         tickerSeries[sub] = subTickers
     return tickerSeries
     
@@ -148,15 +148,17 @@ if __name__ == '__main__':
         - keys are subreddit name, values are a list of tuples (ticker, time mentioned in utc)
     """
     verbose=True
-    subs=["wallstreetbets"] #, "stocks", "investing", "smallstreetbets"]
+    reddit_timeframe="day" # Can be one of: all, day, hour, month, week, year (default: all)
+    subs=["wallstreetbets", "stocks", "investing", "smallstreetbets"]
 
+    assert reddit_timeframe in ["all", "day", "hour", "month", "week", "year"]
 
     # check if stock data is up-to-date:
     if not exchange_data_up_to_date(verbose=verbose):
         update_exchange_data(verbose=verbose)
 
     # scrape stocks:
-    tickerSeries = scrape_stock_subreddits(subs, verbose=verbose)
+    tickerSeries = scrape_stock_subreddits(subs, verbose=verbose, reddit_timeframe=reddit_timeframe)
     if not os.path.exists("output"):
         os.mkdir("output")
     with open(f'output/ticker_series_{date.today()}.json', 'w') as f:
