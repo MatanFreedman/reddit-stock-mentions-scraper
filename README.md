@@ -1,4 +1,4 @@
-# Reddit Ticker Scraper
+# Reddit Stock Ticker Mentions Scraper
 Scrapes WSB and other subreddits for all ticker mentions. 
 
 Running the main.py script will:
