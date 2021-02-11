@@ -1,6 +1,8 @@
 # Reddit Stock Ticker Mentions Scraper
 Scrapes popular stock-focused subreddits for mentions of any tickers in certain exchanges (default is NASDAQ, AMEX, NYSE, and TSX). Output can be used to show timeseries of number of mentions in each subreddit.
 
+<hr>
+
 Running the main.py script will:
 
 1. Create an "exchange_data" folder that pulls all listed tickers from the NASDAQ, AMEX, NYSE, and TSX and stores them in .csv files. The script uses an API from https://dumbstockapi.com . I'm not sure how up to date it is but I doubt it will make a huge difference. 
@@ -33,7 +35,8 @@ To run the program, run the following commands in the command line in the projec
 > python main.py
 ```
 
-The script will create two folders: exchange_data and output. In the output folder the results will be in a file called "ticker_series_{TODAYS DATE}.json" and will look like:
+The script will create two folders: exchange_data and output. <br>
+In the output folder the results will be in a file called "ticker_series_{TODAYS DATE}.json" and will look like:
 
 ```
 {
