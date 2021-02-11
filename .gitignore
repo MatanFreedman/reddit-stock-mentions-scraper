@@ -5,8 +5,4 @@ venv/
 analysis/
 exchange_data/
 output/
-<<<<<<< HEAD
 praw.ini
-=======
-praw.ini
->>>>>>> 310cad5366ec2089dc416b9ce3827878e73d9904
