@@ -5,4 +5,4 @@ venv/
 analysis/
 exchange_data/
 output/
-praw_real.ini
+praw.ini
