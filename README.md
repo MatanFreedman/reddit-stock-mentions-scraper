@@ -23,4 +23,20 @@ client_secret=YOUR_SECRET_KEY
 user_agent="Some unique user agent" 
 ```
 
-More info here: https://praw.readthedocs.io/en/latest/getting_started/quick_start.html 
+More info on reddit developer API here: https://praw.readthedocs.io/en/latest/getting_started/quick_start.html 
+
+
+To run the program, run the following commands in the command line in the project directory:
+```
+> pip install -r requirements.txt
+> venv\Scripts\activate.bat 
+> python main.py
+```
+
+The script will create two folders: exchange_data and output. In the output folder the results will be in a file called "ticker_series_{TODAYS DATE}.json" and will look like:
+
+```
+{
+    "wallstreetbets": [["SEC", 1612741134.0], ["GME", 1612741134.0], ["GME", 1612741945.0], ["GME", 1612740907.0], ["GME", 1612738831.0] ....
+}
+```
